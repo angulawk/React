@@ -8,7 +8,7 @@ class App extends Component {
       { id: "1", name: "Aga", age: 24 },
       { id: "2", name: "Alice", age: 25 },
     ],
-    showPersons: false    
+    showPersons: false
   }
 
   deletePerson = (personIndex) => {
@@ -41,8 +41,9 @@ class App extends Component {
   }
 
   render() {
-    const switchName = {
-      backgroundColor: "white",
+    const switchNameStyle = {
+      backgroundColor: "green",
+      color: "white",
       font: "inherit",
       border: "1px solid black",
       padding: "8px"
@@ -56,13 +57,15 @@ class App extends Component {
         {this.state.persons.map((person, index) => {
           return <Person name={person.name} age={person.age} click={() => this.deletePerson(index)} key={person.id} onChange={(event) => this.handleChangeName(event, person.id)}/>
         })}
-      </div>
-    )}
-  
+      </div>)
+
+      switchNameStyle.backgroundColor = "red"
+    }
+
     return (
       <div className="App">
-        <button 
-          style={switchName}
+        <button
+          style={switchNameStyle}
           onClick={this.togglePersonsVisibility}>
           Toggle Persons
         </button>
