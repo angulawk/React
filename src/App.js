@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from "./Person/Person.js"
 
 class App extends Component {
@@ -59,11 +59,11 @@ class App extends Component {
         })}
       </div>)
 
-      switchNameStyle.backgroundColor = "red"
+      switchNameStyle.backgroundColor = "red";
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <button
           style={switchNameStyle}
           onClick={this.togglePersonsVisibility}>
