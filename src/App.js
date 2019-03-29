@@ -37,35 +37,38 @@ class App extends Component {
 
   togglePersonsVisibility = () => {
     const isPersonVisible = this.state.showPersons;
-    this.setState({showPersons: !isPersonVisible})
+    this.setState({
+      showPersons: !isPersonVisible
+    })
   }
 
   render() {
-    const switchNameStyle = {
-      backgroundColor: "green",
-      color: "white",
-      font: "inherit",
-      border: "1px solid black",
-      padding: "8px"
-    };
-
     let persons = null;
+    let btnClass = "";
 
     if(this.state.showPersons) {
       persons = (
       <div>
         {this.state.persons.map((person, index) => {
-          return <Person name={person.name} age={person.age} click={() => this.deletePerson(index)} key={person.id} onChange={(event) => this.handleChangeName(event, person.id)}/>
+          return (
+            <Person
+              name={person.name}
+              age={person.age}
+              click={() => this.deletePerson(index)}
+              key={person.id}
+              onChange={event => this.handleChangeName(event, person.id)}
+            />
+          )
         })}
       </div>)
 
-      switchNameStyle.backgroundColor = "red";
+      btnClass = classes.Red
     }
 
     return (
       <div className={classes.App}>
         <button
-          style={switchNameStyle}
+          className={btnClass}
           onClick={this.togglePersonsVisibility}>
           Toggle Persons
         </button>
