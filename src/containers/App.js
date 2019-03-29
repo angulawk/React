@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from "./Person/Person.js"
-import ErrorBoundry from "./ErrorBoundary/ErrorBoundary.js"
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
   state = {
@@ -18,7 +18,7 @@ class App extends Component {
     this.setState({ persons: persons })
   }
 
-  handleChangeName = (event, id) => {
+  nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex((singlePerson) => {
       return singlePerson.id === id;
     });
@@ -45,35 +45,22 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let btnClass = "";
 
     if(this.state.showPersons) {
-      persons = (
-      <div>
-        {this.state.persons.map((person, index) => {
-          return (
-            <ErrorBoundry key={person.id}>
-              <Person
-                name={person.name}
-                age={person.age}
-                click={() => this.deletePerson(index)}
-                onChange={event => this.handleChangeName(event, person.id)}
-              />
-            </ErrorBoundry>
-          )
-        })}
-      </div>)
-
-      btnClass = classes.Red
+      persons = <Persons
+          persons={this.state.persons}
+          clicked={this.deletePerson}
+          changed={this.nameChangedHandler}
+        />
     }
 
     return (
       <div className={classes.App}>
-        <button
-          className={btnClass}
-          onClick={this.togglePersonsVisibility}>
-          Toggle Persons
-        </button>
+        <Cockpit
+          persons={this.state.persons}
+          clicked={this.togglePersonsVisibility}
+          showPersons={this.state.showPersons}
+        />
         {persons}
       </div>
     );
